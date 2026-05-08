@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Racconti del Riccio · Antologia di Maria Fernanda Leone</title>
+    <meta name="description" content="I Racconti del Riccio — un'antologia di racconti brevi di Maria Fernanda Leone. Storie di nostalgia, viaggi, immaginazione e memoria.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🦔%3C/text%3E%3C/svg%3E">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cream: { 50: '#fdfaf3', 100: '#fbf7ec', 200: '#f4ecd8', 300: '#e8dcb8' },
+                        forest: { 500: '#3d6149', 600: '#2f4d3a', 700: '#243d2e', 800: '#1a2c22', 900: '#0f1c15' },
+                        honey: { 400: '#e0b97f', 500: '#c89760', 600: '#a87545', 700: '#8a5a35' },
+                        ink: { 700: '#3d342c', 800: '#2a241e', 900: '#1c1814' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-cream-50 dark:bg-forest-900 text-ink-900 dark:text-cream-100 transition-colors duration-700 antialiased overflow-x-hidden">
+
+    <!-- Decorative paper texture overlay -->
+    <div class="paper-texture"></div>
+
+    <!-- Cursor glow (decorative) -->
+    <div id="cursor-glow" class="pointer-events-none fixed w-[400px] h-[400px] rounded-full opacity-0 transition-opacity duration-500 z-0" style="background: radial-gradient(circle, rgba(200,151,96,0.18) 0%, transparent 70%); transform: translate(-50%, -50%);"></div>
+
+    <!-- Reading progress bar (visible during modal) -->
+    <div id="reading-progress" class="fixed top-0 left-0 h-[3px] bg-honey-600 z-[110] w-0 transition-[width] duration-150"></div>
+
+    <!-- Navigazione -->
+    <nav class="fixed w-full z-50 bg-cream-50/80 dark:bg-forest-900/80 backdrop-blur-xl border-b border-cream-200/60 dark:border-forest-700/60">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#top" class="flex items-center gap-3 group">
+                <span class="logo-spin w-10 h-10 flex items-center justify-center rounded-full bg-forest-600 dark:bg-honey-500 text-cream-50 dark:text-forest-900 shadow-md group-hover:rotate-12 transition-transform duration-500">
+                    <!-- Hedgehog SVG -->
+                    <svg viewBox="0 0 64 64" class="w-6 h-6" fill="currentColor" aria-hidden="true">
+                        <path d="M58 38c0 9.4-9.4 17-26 17S6 47.4 6 38c0-2.5.7-4.8 2-6.9.4-.7 1.3-.9 2-.4l2.5 1.7c.6.4 1.4.3 1.9-.3.8-.9 2-1.4 3.2-1.4 1 0 1.9.3 2.6.9.6.5 1.4.5 2.1 0 .7-.5 1.6-.9 2.6-.9 1 0 1.9.3 2.6.9.6.5 1.4.5 2.1 0 .7-.5 1.6-.9 2.6-.9s1.9.3 2.6.9c.6.5 1.4.5 2.1 0 .7-.5 1.6-.9 2.6-.9s1.9.3 2.6.9c.6.5 1.4.5 2.1 0 .7-.6 1.6-.9 2.6-.9 1.2 0 2.4.5 3.2 1.4.5.6 1.3.7 1.9.3l2.5-1.7c.7-.5 1.6-.3 2 .4 1.3 2.1 2 4.4 2 6.9z"/>
+                        <ellipse cx="14" cy="40" rx="9" ry="7" />
+                        <circle cx="11" cy="38" r="1.4" fill="#fff"/>
+                        <circle cx="11" cy="38" r="0.6"/>
+                        <circle cx="8" cy="42" r="1.2"/>
+                    </svg>
+                </span>
+                <div class="leading-tight">
+                    <p class="font-serif italic text-[10px] tracking-[0.3em] uppercase text-honey-600 dark:text-honey-400">Antologia</p>
+                    <p class="font-serif font-bold text-base md:text-lg tracking-tight">I Racconti del Riccio</p>
+                </div>
+            </a>
+
+            <div class="flex items-center gap-2">
+                <a href="#racconti" class="hidden md:inline-block text-sm font-medium px-4 py-2 rounded-full hover:bg-cream-200/60 dark:hover:bg-forest-700/60 transition">Racconti</a>
+                <a href="#autrice" class="hidden md:inline-block text-sm font-medium px-4 py-2 rounded-full hover:bg-cream-200/60 dark:hover:bg-forest-700/60 transition">L'autrice</a>
+                <button id="theme-toggle" aria-label="Cambia tema" class="p-2.5 rounded-full bg-cream-200/60 dark:bg-forest-700/60 hover:bg-cream-200 dark:hover:bg-forest-700 transition-all">
+                    <svg class="w-4 h-4 dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                    <svg class="w-4 h-4 hidden dark:inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.07-7.07l-1.41 1.41M6.34 17.66l-1.41 1.41m12.72 0l-1.41-1.41M6.34 6.34L4.93 4.93"/></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="top" class="relative pt-36 pb-24 px-6 overflow-hidden">
+        <!-- Decorative leaves/branches -->
+        <svg class="absolute -top-10 -left-10 w-72 h-72 opacity-20 dark:opacity-10 text-forest-600 dark:text-honey-500 -rotate-12 hidden md:block" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M20 180 Q60 120 100 100 T180 30" stroke-linecap="round"/>
+            <ellipse cx="60" cy="130" rx="14" ry="6" transform="rotate(-30 60 130)"/>
+            <ellipse cx="90" cy="105" rx="14" ry="6" transform="rotate(-25 90 105)"/>
+            <ellipse cx="125" cy="80" rx="14" ry="6" transform="rotate(-20 125 80)"/>
+            <ellipse cx="155" cy="55" rx="14" ry="6" transform="rotate(-15 155 55)"/>
+        </svg>
+        <svg class="absolute top-20 right-0 w-96 h-96 opacity-15 dark:opacity-10 text-honey-600 dark:text-honey-400 rotate-12 hidden md:block" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M180 20 Q140 80 100 100 T20 170" stroke-linecap="round"/>
+            <ellipse cx="140" cy="70" rx="14" ry="6" transform="rotate(30 140 70)"/>
+            <ellipse cx="110" cy="95" rx="14" ry="6" transform="rotate(25 110 95)"/>
+            <ellipse cx="75" cy="125" rx="14" ry="6" transform="rotate(20 75 125)"/>
+            <ellipse cx="45" cy="150" rx="14" ry="6" transform="rotate(15 45 150)"/>
+        </svg>
+
+        <div class="container mx-auto text-center relative z-10 max-w-4xl">
+            <div class="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-cream-200/70 dark:bg-forest-700/50 border border-cream-300/60 dark:border-forest-600/50 backdrop-blur-sm">
+                <span class="w-2 h-2 rounded-full bg-honey-500 animate-pulse"></span>
+                <span class="text-xs font-medium tracking-[0.2em] uppercase text-ink-700 dark:text-cream-200">Antologia di racconti brevi</span>
+            </div>
+
+            <h2 class="font-serif text-5xl md:text-7xl lg:text-8xl mb-8 leading-[0.95] tracking-tight">
+                I Racconti<br>
+                <span class="italic text-honey-600 dark:text-honey-400 font-light">del Riccio</span>
+            </h2>
+
+            <p class="font-serif italic text-lg md:text-xl text-ink-700/80 dark:text-cream-200/80 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Piccole storie raccolte come foglie d'autunno — di nostalgia, di sogni, di voci che attraversano i giardini della memoria.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <a href="#racconti" class="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-forest-600 hover:bg-forest-700 dark:bg-honey-500 dark:hover:bg-honey-600 text-cream-50 dark:text-forest-900 font-medium shadow-lg shadow-forest-600/20 dark:shadow-honey-500/20 transition-all hover:scale-105">
+                    Sfoglia i racconti
+                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+                <a href="#autrice" class="px-7 py-3.5 rounded-full border border-ink-900/15 dark:border-cream-100/20 hover:bg-cream-200/60 dark:hover:bg-forest-700/40 transition font-medium text-sm">
+                    Conosci l'autrice
+                </a>
+            </div>
+
+            <!-- Tiny stats -->
+            <div class="mt-16 flex justify-center items-center gap-8 md:gap-12 text-sm">
+                <div class="text-center">
+                    <p class="font-serif text-3xl font-bold" id="stat-stories">7</p>
+                    <p class="text-[10px] tracking-[0.25em] uppercase text-ink-700/60 dark:text-cream-200/60 mt-1">Racconti</p>
+                </div>
+                <div class="w-px h-10 bg-ink-900/15 dark:bg-cream-100/15"></div>
+                <div class="text-center">
+                    <p class="font-serif text-3xl font-bold" id="stat-categories">7</p>
+                    <p class="text-[10px] tracking-[0.25em] uppercase text-ink-700/60 dark:text-cream-200/60 mt-1">Categorie</p>
+                </div>
+                <div class="w-px h-10 bg-ink-900/15 dark:bg-cream-100/15"></div>
+                <div class="text-center">
+                    <p class="font-serif text-3xl font-bold">∞</p>
+                    <p class="text-[10px] tracking-[0.25em] uppercase text-ink-700/60 dark:text-cream-200/60 mt-1">Emozioni</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll cue -->
+        <div class="mt-20 flex justify-center">
+            <div class="flex flex-col items-center gap-2 text-ink-700/40 dark:text-cream-200/40 animate-bounce-slow">
+                <span class="text-[10px] tracking-[0.3em] uppercase">Scorri</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sezione racconti -->
+    <main id="racconti" class="container mx-auto px-6 pb-24 relative z-10">
+
+        <!-- Section header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div>
+                <p class="font-serif italic text-honey-600 dark:text-honey-400 mb-2 text-lg" style="font-family: 'Caveat', cursive; font-size: 1.5rem;">— la biblioteca —</p>
+                <h3 class="font-serif text-4xl md:text-5xl font-bold tracking-tight">Tutti i racconti</h3>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-700/50 dark:text-cream-200/50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"/></svg>
+                    <input id="search-input" type="text" placeholder="Cerca un racconto…" class="pl-10 pr-4 py-2.5 rounded-full bg-cream-100 dark:bg-forest-800/60 border border-cream-200 dark:border-forest-700 text-sm focus:outline-none focus:ring-2 focus:ring-honey-500/50 transition w-full md:w-64">
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter chips -->
+        <div id="filter-chips" class="flex flex-wrap gap-2 mb-12"></div>
+
+        <!-- Griglia Racconti -->
+        <div id="stories-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
+
+        <!-- Empty state -->
+        <div id="empty-state" class="hidden text-center py-20">
+            <p class="font-serif italic text-2xl text-ink-700/50 dark:text-cream-200/50">Nessun racconto trovato.</p>
+        </div>
+    </main>
+
+    <!-- Sezione autrice -->
+    <section id="autrice" class="container mx-auto px-6 py-24 relative z-10">
+        <div class="max-w-4xl mx-auto bg-gradient-to-br from-cream-100 to-cream-200/60 dark:from-forest-800/60 dark:to-forest-800/30 rounded-[2.5rem] p-10 md:p-16 border border-cream-200 dark:border-forest-700/60 relative overflow-hidden">
+            <!-- Decorative quote mark -->
+            <span class="absolute top-4 right-8 font-serif text-[12rem] leading-none text-honey-500/15 dark:text-honey-400/15 select-none">"</span>
+
+            <p class="font-serif italic text-honey-600 dark:text-honey-400 mb-3" style="font-family: 'Caveat', cursive; font-size: 1.5rem;">— l'autrice —</p>
+            <h3 class="font-serif text-4xl md:text-5xl font-bold tracking-tight mb-6">Maria Fernanda Leone</h3>
+            <p class="font-serif text-lg md:text-xl leading-relaxed text-ink-800 dark:text-cream-100/90 max-w-2xl">
+                Maria Fernanda raccoglie i suoi racconti come un riccio raccoglie le foglie: con cura, in silenzio, lasciando che ogni parola trovi il suo posto. Le sue storie attraversano la nostalgia, la fantasia e la vita di tutti i giorni, restituendo al lettore un sorriso, un brivido, talvolta una piccola lacrima.
+            </p>
+            <p class="mt-6 font-serif italic text-ink-700/70 dark:text-cream-200/70" style="font-family: 'Caveat', cursive; font-size: 1.4rem;">
+                — un sorriso, una pausa, una piccola scintilla di mondo.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-cream-200 dark:border-forest-700/60 mt-12 py-12 px-6 relative z-10">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-ink-700/60 dark:text-cream-200/60">
+            <div class="flex items-center gap-3">
+                <span class="w-8 h-8 flex items-center justify-center rounded-full bg-forest-600 dark:bg-honey-500 text-cream-50 dark:text-forest-900">
+                    <svg viewBox="0 0 64 64" class="w-4 h-4" fill="currentColor"><path d="M58 38c0 9.4-9.4 17-26 17S6 47.4 6 38c0-2.5.7-4.8 2-6.9.4-.7 1.3-.9 2-.4l2.5 1.7c.6.4 1.4.3 1.9-.3.8-.9 2-1.4 3.2-1.4 1 0 1.9.3 2.6.9.6.5 1.4.5 2.1 0 .7-.5 1.6-.9 2.6-.9 1 0 1.9.3 2.6.9.6.5 1.4.5 2.1 0 .7-.5 1.6-.9 2.6-.9s1.9.3 2.6.9c.6.5 1.4.5 2.1 0 .7-.5 1.6-.9 2.6-.9s1.9.3 2.6.9c.6.5 1.4.5 2.1 0 .7-.6 1.6-.9 2.6-.9 1.2 0 2.4.5 3.2 1.4.5.6 1.3.7 1.9.3l2.5-1.7c.7-.5 1.6-.3 2 .4 1.3 2.1 2 4.4 2 6.9z"/><ellipse cx="14" cy="40" rx="9" ry="7"/><circle cx="11" cy="38" r="1.4" fill="#fff"/></svg>
+                </span>
+                <span class="font-serif italic">© <span id="year"></span> · I Racconti del Riccio</span>
+            </div>
+            <p class="font-serif italic">Tutti i racconti di Maria Fernanda Leone.</p>
+        </div>
+    </footer>
+
+    <!-- Modal di Lettura -->
+    <div id="story-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-10">
+        <div class="absolute inset-0 bg-forest-900/80 backdrop-blur-md transition-opacity" id="modal-overlay"></div>
+        <div class="relative bg-cream-50 dark:bg-forest-800 w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-3xl shadow-2xl border border-cream-200 dark:border-forest-700 modal-paper" id="modal-scroll-container">
+            <!-- Sticky top bar -->
+            <div class="sticky top-0 bg-cream-50/95 dark:bg-forest-800/95 backdrop-blur-sm border-b border-cream-200/80 dark:border-forest-700/80 px-6 md:px-10 py-4 flex justify-between items-center z-10">
+                <span id="modal-category-tag" class="text-[10px] font-bold tracking-[0.25em] uppercase text-honey-600 dark:text-honey-400"></span>
+                <button id="close-modal" aria-label="Chiudi" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-cream-200 dark:hover:bg-forest-700 transition-all hover:rotate-90 duration-300">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div id="modal-content" class="px-6 md:px-12 py-10 md:py-14"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

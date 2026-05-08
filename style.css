@@ -1,0 +1,257 @@
+/* ===========================================
+   I Racconti del Riccio
+   Stylesheet
+   =========================================== */
+
+:root {
+    --font-titles: 'Fraunces', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-handwritten: 'Caveat', cursive;
+}
+
+html, body {
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .font-serif {
+    font-family: var(--font-titles);
+    font-feature-settings: "ss01", "ss02";
+}
+
+/* ----- Subtle paper grain texture overlay ----- */
+.paper-texture {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    background-image:
+        radial-gradient(circle at 25% 35%, rgba(168, 117, 69, 0.04) 0%, transparent 35%),
+        radial-gradient(circle at 75% 65%, rgba(61, 97, 73, 0.04) 0%, transparent 35%);
+}
+
+.dark .paper-texture {
+    mix-blend-mode: screen;
+    opacity: 0.2;
+    background-image:
+        radial-gradient(circle at 25% 35%, rgba(224, 185, 127, 0.05) 0%, transparent 35%),
+        radial-gradient(circle at 75% 65%, rgba(61, 97, 73, 0.08) 0%, transparent 35%);
+}
+
+/* ----- Story card animations ----- */
+.story-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    will-change: transform, opacity;
+}
+
+.story-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.story-card:hover {
+    transform: translateY(-6px);
+}
+
+.story-card .card-arrow {
+    transition: transform 0.3s ease;
+}
+.story-card:hover .card-arrow {
+    transform: translateX(4px);
+}
+
+/* Card "book ribbon" decoration */
+.story-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    width: 3px;
+    height: 28px;
+    background: linear-gradient(180deg, #c89760, #a87545);
+    border-radius: 0 0 3px 3px;
+    opacity: 0;
+    transform: translateY(-28px);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.story-card:hover::before {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ----- Filter chips ----- */
+.filter-chip {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(28, 24, 20, 0.12);
+    background: transparent;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+.dark .filter-chip {
+    border-color: rgba(251, 247, 236, 0.15);
+}
+.filter-chip:hover {
+    background: rgba(232, 220, 184, 0.4);
+}
+.dark .filter-chip:hover {
+    background: rgba(36, 61, 46, 0.6);
+}
+.filter-chip.active {
+    background: #2f4d3a;
+    color: #fdfaf3;
+    border-color: #2f4d3a;
+}
+.dark .filter-chip.active {
+    background: #c89760;
+    color: #1c1814;
+    border-color: #c89760;
+}
+
+/* ----- Modal ----- */
+#story-modal.active { display: flex !important; }
+
+#story-modal[aria-hidden="false"] .modal-paper {
+    animation: modalSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalSlideIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+#modal-content h2 {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+}
+
+#modal-content .story-meta {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(61, 52, 44, 0.55);
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(168, 117, 69, 0.18);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    align-items: center;
+}
+.dark #modal-content .story-meta {
+    color: rgba(251, 247, 236, 0.55);
+    border-bottom-color: rgba(224, 185, 127, 0.2);
+}
+
+#modal-content .story-meta .author {
+    font-family: var(--font-handwritten);
+    font-size: 1.4rem;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #a87545;
+}
+.dark #modal-content .story-meta .author {
+    color: #e0b97f;
+}
+
+#modal-content .prose-body {
+    font-family: var(--font-titles);
+    font-size: 1.125rem;
+    line-height: 1.85;
+    color: rgba(28, 24, 20, 0.88);
+    max-width: 65ch;
+    margin: 0 auto;
+}
+.dark #modal-content .prose-body {
+    color: rgba(251, 247, 236, 0.88);
+}
+
+#modal-content .prose-body p {
+    margin-bottom: 1.4rem;
+}
+
+/* Drop cap on first paragraph */
+#modal-content .prose-body > p:first-child::first-letter,
+#modal-content .prose-body::first-letter {
+    font-size: 4.5rem;
+    line-height: 0.9;
+    float: left;
+    margin: 0.4rem 0.6rem 0 0;
+    color: #a87545;
+    font-weight: 700;
+    font-style: normal;
+    font-family: var(--font-titles);
+}
+.dark #modal-content .prose-body > p:first-child::first-letter,
+.dark #modal-content .prose-body::first-letter {
+    color: #e0b97f;
+}
+
+/* ----- Custom scrollbar ----- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: rgba(168, 117, 69, 0.45);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(168, 117, 69, 0.7);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+/* ----- Animations ----- */
+@keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(8px); opacity: 1; }
+}
+.animate-bounce-slow {
+    animation: bounce-slow 2.5s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-12deg); }
+    50%      { transform: translateY(-10px) rotate(-10deg); }
+}
+
+/* Logo subtle wiggle on hover */
+.logo-spin svg {
+    transition: transform 0.4s ease;
+}
+
+/* ----- Selection ----- */
+::selection {
+    background: #c89760;
+    color: #fdfaf3;
+}
+
+/* ----- Reduced motion preferences ----- */
+@media (prefers-reduced-motion: reduce) {
+    .story-card,
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ----- Smooth focus states ----- */
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+    outline: 2px solid #c89760;
+    outline-offset: 3px;
+    border-radius: 8px;
+}
