@@ -1,0 +1,45 @@
+============================================
+  COME AGGIUNGERE UN NUOVO RACCONTO AL SITO
+============================================
+
+PASSO 1 - Prepara il file di testo
+-----------------------------------
+1. Apri il file "_TEMPLATE.txt" che trovi in questa cartella
+2. File > Salva con nome... -> dai un nome tipo "08-titolo-del-racconto.txt"
+   (il numero serve per l'ordine, scegli un numero successivo all'ultimo
+   racconto che hai gia' pubblicato)
+3. Quando salvi, scegli codifica "UTF-8" dal menu' a tendina in basso.
+4. Apri il nuovo file e:
+   - Cambia il TITOLO
+   - Cambia la CATEGORIA (puoi usarne una esistente o inventarne una)
+   - Aggiorna la DATA se vuoi
+   - Cancella tutto il testo di esempio e scrivi il tuo racconto
+   - Ricordati: paragrafi separati da una RIGA VUOTA
+
+SE HAI GIA' IL RACCONTO IN WORD:
+- Apri il .docx in Word
+- File > Salva con nome -> tipo file "Testo normale (.txt)"
+- Quando appare la finestra di conversione, scegli codifica "Unicode (UTF-8)"
+- Poi apri il file .txt risultante in Blocco Note, aggiungi le 3 righe iniziali
+  (TITOLO, CATEGORIA, DATA) seguite da una riga vuota, e salva.
+
+PASSO 2 - Pubblica
+------------------
+Torna nella cartella principale (Tales_Site) e fai DOPPIO CLICK su
+"pubblica.bat". Si apre una finestra nera, ti chiede un messaggio (puoi
+premere Invio per usare quello di default), e in 30 secondi il sito e'
+online aggiornato!
+
+L'indirizzo del sito e':
+  https://pietroaldotorito.github.io/racconti-leone/
+
+============================================
+
+NOTE TECNICHE:
+- I file che iniziano con "_" (underscore) vengono IGNORATI dal sito
+  (es: _TEMPLATE.txt, questo file).
+- L'ordine dei racconti sul sito segue l'ordine alfabetico dei nomi
+  dei file (per questo usiamo i numeri 01-, 02-, 03-).
+- Per modificare un racconto esistente: apri il suo file .txt, modifica,
+  salva, fai doppio click su pubblica.bat.
+- Per eliminare un racconto: cancella il suo file .txt, poi pubblica.bat.

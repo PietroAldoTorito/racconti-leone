@@ -2,46 +2,63 @@
 
 > Antologia di racconti brevi di **Maria Fernanda Leone**.
 
-Un piccolo sito pensato come un quaderno di carta: storie raccolte come foglie d'autunno, di nostalgia, di sogni, di voci che attraversano i giardini della memoria.
+Sito online: [pietroaldotorito.github.io/racconti-leone](https://pietroaldotorito.github.io/racconti-leone/)
 
-## Vedi il sito
+## Aggiungere un nuovo racconto (workflow semplice)
 
-Il sito è pubblicato tramite GitHub Pages. Apri il file `index.html` localmente o visita la versione live.
+1. Apri la cartella `racconti/`
+2. Duplica il file `_TEMPLATE.txt`, rinominalo (es. `08-il-vento-di-marzo.txt`)
+3. Apri il file, modifica le prime righe (TITOLO, CATEGORIA, DATA) e scrivi il racconto sotto la riga vuota
+4. Torna nella cartella principale e fai **doppio click su `pubblica.bat`**
 
-## Struttura
+In 30-60 secondi il sito è aggiornato.
+
+Istruzioni passo-passo dettagliate: vedi `racconti/_COME-AGGIUNGERE-UN-RACCONTO.txt`.
+
+## Struttura del progetto
 
 ```
 .
-├── index.html   # struttura del sito
-├── style.css    # stile (palette letteraria, drop cap, animazioni)
-└── app.js       # racconti, filtri, ricerca, modal di lettura
+├── index.html                # struttura del sito
+├── style.css                 # stile
+├── app.js                    # logica (carica i racconti dai .txt)
+├── pubblica.bat              # doppio-click per pubblicare
+├── pubblica.ps1              # script chiamato dal .bat
+└── racconti/
+    ├── index.json            # indice auto-generato (non toccare a mano)
+    ├── _TEMPLATE.txt         # modello da copiare per nuovi racconti
+    ├── _COME-AGGIUNGERE-UN-RACCONTO.txt
+    ├── 01-notte-di-luna.txt
+    ├── 02-ascoltando.txt
+    └── ...                   # un file per ogni racconto
 ```
 
-## Caratteristiche
+I file che iniziano con `_` (underscore) vengono **ignorati** dal sito: usali per template, note e materiale di lavoro.
 
-- Sette racconti con filtri per categoria e ricerca live
+## Formato di un file racconto
+
+```
+TITOLO: Il titolo del racconto
+CATEGORIA: Nostalgia
+DATA: 2026
+
+Primo paragrafo del racconto.
+
+Secondo paragrafo, separato dal primo da una riga vuota.
+
+E così via, fino alla fine.
+```
+
+Le categorie già esistenti hanno un'icona e un colore dedicati: *Natura, Nostalgia, Sci-Fi, Arte, Viaggi, Racconti, Politica*. Puoi inventarne di nuove — appariranno con il colore "miele" di default.
+
+## Caratteristiche del sito
+
+- Filtri per categoria + ricerca live
 - Tema chiaro / scuro con preferenza salvata
 - Tempo di lettura stimato per ogni racconto
 - Esperienza di lettura curata (drop cap, barra di avanzamento, tipografia letteraria)
-- Design responsive, accessibile, senza dipendenze pesanti
-
-## Aggiungere un nuovo racconto
-
-Apri `app.js`, trova l'array `storiesData` e aggiungi un oggetto:
-
-```js
-{
-  title: "Titolo",
-  author: "Maria Fernanda Leone",
-  category: "Nostalgia",            // o un'altra delle categorie esistenti
-  excerpt: "Prime righe del racconto…",
-  content: `Testo completo. Usa <br><br> per separare i paragrafi.`,
-  date: "2026"
-}
-```
-
-Salva, ricarica la pagina: il racconto appare automaticamente con la sua icona, il filtro e il tempo di lettura.
+- Responsive, accessibile, nessuna dipendenza pesante
 
 ---
 
-Realizzato con cura — *un sorriso, una pausa, una piccola scintilla di mondo.*
+*Un sorriso, una pausa, una piccola scintilla di mondo.*

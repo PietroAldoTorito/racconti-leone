@@ -1,0 +1,14 @@
+TITOLO: Scrivi qui il titolo del racconto
+CATEGORIA: Nostalgia
+DATA: 2026
+
+Scrivi qui il primo paragrafo del tuo racconto. Puoi scriverlo lungo quanto vuoi, andrà a capo da solo nel sito.
+
+Per andare a capo e iniziare un nuovo paragrafo, lascia una riga vuota fra un paragrafo e l'altro come ho fatto qui sopra.
+
+Questo è il terzo paragrafo. Continua così fino alla fine del racconto. Quando hai finito, salva il file con un nome del tipo "08-titolo-del-racconto.txt" dentro la cartella racconti/ e poi fai doppio click su "pubblica.bat" nella cartella principale.
+
+NOTE:
+- Le categorie già esistenti sono: Natura, Nostalgia, Sci-Fi, Arte, Viaggi, Racconti, Politica. Puoi inventarne di nuove.
+- Il numero davanti al nome del file (08-, 09-, ecc.) serve solo per stabilire l'ordine in cui appaiono sul sito.
+- I file che iniziano con "_" (underscore) come questo template vengono ignorati dal sito.
